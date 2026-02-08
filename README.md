@@ -66,6 +66,12 @@ Widoki użytkownika:
 
 To są tylko widoki. Zero ciężkiej logiki.
 
+Każdy komponent jest osobnym plikiem w /components
+Komponenty powtarzalne, proste, modularne
+pages jedynie łączy komponenty – żadnej logiki w nim nie ma
+
+wygląd strony ma być wzorowany na pomagam.pl
+
 ---
 
 ### /lib
