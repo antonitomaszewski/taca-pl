@@ -44,7 +44,7 @@ Hosting (docelowo):
 
 ## Struktura katalogów
 
-/pages
+/app
 /lib
 /payments
 /db
