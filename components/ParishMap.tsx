@@ -1,65 +1,25 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import 'leaflet/dist/leaflet.css';
-
-
-interface Parish {
-  id: string;
-  name: string;
-  city: string;
-  slug: string;
-  lat: number;
-  lng: number;
-}
-
-const PLACEHOLDER_PARISHES: Parish[] = [
-  {
-    id: '1',
-    name: 'Parafia św. Wojciecha',
-    city: 'Warszawa',
-    slug: 'sw-wojciecha-warszawa',
-    lat: 52.2297,
-    lng: 21.0122,
-  },
-  {
-    id: '2',
-    name: 'Parafia Matki Bożej Częstochowskiej',
-    city: 'Kraków',
-    slug: 'matki-bozej-czestochowskiej-krakow',
-    lat: 50.0647,
-    lng: 19.9450,
-  },
-  {
-    id: '3',
-    name: 'Parafia św. Jana Chrzciciela',
-    city: 'Gdańsk',
-    slug: 'sw-jana-chrzciciela-gdansk',
-    lat: 54.3520,
-    lng: 18.6466,
-  },
-  {
-    id: '4',
-    name: 'Parafia Najświętszego Serca Pana Jezusa',
-    city: 'Poznań',
-    slug: 'najswietszego-serca-pana-jezusa-poznan',
-    lat: 52.4064,
-    lng: 16.9252,
-  },
-  {
-    id: '5',
-    name: 'Parafia św. Stanisława Kostki',
-    city: 'Wrocław',
-    slug: 'sw-stanislawa-kostki-wroclaw',
-    lat: 51.1079,
-    lng: 17.0385,
-  },
-];
+import { getAllParishes, Parish } from '../lib/parishService';
 
 function MapContent() {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
+  const [parishes, setParishes] = useState<Parish[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchParishes() {
+      const data = await getAllParishes();
+      setParishes(data);
+      setLoading(false);
+    }
+
+    fetchParishes();
+  }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined' || !mapRef.current || mapInstanceRef.current) return;
@@ -83,8 +43,8 @@ function MapContent() {
       }).addTo(map);
 
       // Dodanie markerów dla każdej parafii
-      PLACEHOLDER_PARISHES.forEach((parish) => {
-        const marker = L.marker([parish.lat, parish.lng]).addTo(map);
+      parishes.forEach((parish) => {
+        const marker = L.marker([parish.location.lat, parish.location.lon]).addTo(map);
 
         // Tooltip z nazwą parafii (pokazuje się na hover)
         marker.bindTooltip(parish.name, {
@@ -94,7 +54,7 @@ function MapContent() {
 
         // Kliknięcie w marker → przekierowanie
         marker.on('click', () => {
-          window.location.href = `/${parish.slug}`;
+          window.location.href = `/${parish.tag}`;
         });
       });
 
@@ -108,7 +68,15 @@ function MapContent() {
         mapInstanceRef.current = null;
       }
     };
-  }, []);
+  }, [parishes, loading]);
+
+  if (loading) {
+    return (
+      <div className="w-full h-full rounded-lg bg-gray-100 flex items-center justify-center">
+        <span className="text-gray-500">Ładowanie parafii...</span>
+      </div>
+    );
+  }
 
   return <div ref={mapRef} className="w-full h-full rounded-lg" />;
 }

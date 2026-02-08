@@ -4,7 +4,7 @@ interface Parish {
   id: string;
   name: string;
   city: string;
-  slug: string;
+  tag: string;
 }
 
 const PLACEHOLDER_PARISHES: Parish[] = [
@@ -12,31 +12,31 @@ const PLACEHOLDER_PARISHES: Parish[] = [
     id: '1',
     name: 'Parafia św. Wojciecha',
     city: 'Warszawa',
-    slug: 'sw-wojciecha-warszawa',
+    tag: 'sw-wojciecha-warszawa',
   },
   {
     id: '2',
     name: 'Parafia Matki Bożej Częstochowskiej',
     city: 'Kraków',
-    slug: 'matki-bozej-czestochowskiej-krakow',
+    tag: 'matki-bozej-czestochowskiej-krakow',
   },
   {
     id: '3',
     name: 'Parafia św. Jana Chrzciciela',
     city: 'Gdańsk',
-    slug: 'sw-jana-chrzciciela-gdansk',
+    tag: 'sw-jana-chrzciciela-gdansk',
   },
   {
     id: '4',
     name: 'Parafia Najświętszego Serca Pana Jezusa',
     city: 'Poznań',
-    slug: 'najswietszego-serca-pana-jezusa-poznan',
+    tag: 'najswietszego-serca-pana-jezusa-poznan',
   },
   {
     id: '5',
     name: 'Parafia św. Stanisława Kostki',
     city: 'Wrocław',
-    slug: 'sw-stanislawa-kostki-wroclaw',
+    tag: 'sw-stanislawa-kostki-wroclaw',
   },
 ];
 
@@ -46,7 +46,7 @@ export function ResultsList() {
       {PLACEHOLDER_PARISHES.map((parish) => (
         <Link
           key={parish.id}
-          href={`/${parish.slug}`}
+          href={`/${parish.tag}`}
           className="block px-4 py-4 border-b border-gray-200 last:border-b-0 hover:bg-gray-100 transition-colors"
         >
           <h3 className="font-semibold text-gray-900 text-sm mb-1">

@@ -115,7 +115,7 @@ Kolekcje:
 parishes
 - id
 - name
-- slug
+- tag
 - description
 - location
 - bank_account
