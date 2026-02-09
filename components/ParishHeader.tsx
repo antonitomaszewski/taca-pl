@@ -4,8 +4,9 @@ interface ParishHeaderProps {
   name: string;
   city: string;
   imageUrl?: string;
+  onDonateClick?: () => void;
 }
-export function ParishHeader({ name, city, imageUrl }: ParishHeaderProps) {
+export function ParishHeader({ name, city, imageUrl, onDonateClick }: ParishHeaderProps) {
   return (
     <div className="bg-white border-b border-gray-200">
       <div className="mx-auto max-w-[1200px] px-4 py-8">
@@ -32,9 +33,18 @@ export function ParishHeader({ name, city, imageUrl }: ParishHeaderProps) {
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               {name}
             </h1>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 mb-4">
               {city}
             </p>
+
+            {onDonateClick && (
+              <button
+                onClick={onDonateClick}
+                className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
+              >
+                Wpłacam
+              </button>
+            )}
           </div>
         </div>
       </div>

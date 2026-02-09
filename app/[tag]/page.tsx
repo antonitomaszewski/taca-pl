@@ -1,3 +1,4 @@
+'use client';
 import { ParishHeader } from '@/components/ParishHeader';
 import { ParishMiniMap } from '@/components/ParishMiniMap';
 
@@ -8,6 +9,7 @@ export default function ParishPage() {
         name="Parafia św. Wojciecha" 
         city="Warszawa"
         imageUrl='/images/DSCF6138.JPG'
+        onDonateClick={() => console.log('Przejście do płatności')}
       />
     
     <div className="mx-auto max-w-[1200px] px-4 py-8">
