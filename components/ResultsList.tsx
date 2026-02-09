@@ -1,49 +1,14 @@
 import Link from 'next/link';
+import { Parish } from '../lib/parishService';
 
-interface Parish {
-  id: string;
-  name: string;
-  city: string;
-  tag: string;
+interface ResultsListProps {
+  results: Parish[];
 }
 
-const PLACEHOLDER_PARISHES: Parish[] = [
-  {
-    id: '1',
-    name: 'Parafia św. Wojciecha',
-    city: 'Warszawa',
-    tag: 'sw-wojciecha-warszawa',
-  },
-  {
-    id: '2',
-    name: 'Parafia Matki Bożej Częstochowskiej',
-    city: 'Kraków',
-    tag: 'matki-bozej-czestochowskiej-krakow',
-  },
-  {
-    id: '3',
-    name: 'Parafia św. Jana Chrzciciela',
-    city: 'Gdańsk',
-    tag: 'sw-jana-chrzciciela-gdansk',
-  },
-  {
-    id: '4',
-    name: 'Parafia Najświętszego Serca Pana Jezusa',
-    city: 'Poznań',
-    tag: 'najswietszego-serca-pana-jezusa-poznan',
-  },
-  {
-    id: '5',
-    name: 'Parafia św. Stanisława Kostki',
-    city: 'Wrocław',
-    tag: 'sw-stanislawa-kostki-wroclaw',
-  },
-];
-
-export function ResultsList() {
+export function ResultsList({ results }: ResultsListProps) {
   return (
     <div className="bg-gray-50 rounded-lg overflow-hidden">
-      {PLACEHOLDER_PARISHES.map((parish) => (
+      {results.map((parish) => (
         <Link
           key={parish.id}
           href={`/${parish.tag}`}
