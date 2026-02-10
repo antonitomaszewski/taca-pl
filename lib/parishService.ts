@@ -9,6 +9,8 @@ export interface Parish {
     lat: number;
     lon: number;
   };
+  description: string;
+  image: string
 }
 export async function getAllParishes(): Promise<Parish[]> {
   const records = await pb.collection('parishes').getFullList({
@@ -21,6 +23,8 @@ export async function getAllParishes(): Promise<Parish[]> {
     city: record.city,
     tag: record.tag,
     location: record.location,
+    description: record.description,
+    image: record.image,
   }));
 }
 
@@ -34,6 +38,8 @@ export async function getParishByTag(tag: string): Promise<Parish | null> {
       city: record.city,
       tag: record.tag,
       location: record.location,
+      description: record.description,
+      image: record.image,
     };
   } catch (error) {
     return null;
@@ -56,5 +62,7 @@ export async function searchParishes(query: string): Promise<Parish[]> {
     city: record.city,
     tag: record.tag,
     location: record.location,
+    description: record.description,
+    image: record.image,
   }));
 }
