@@ -8,33 +8,48 @@ import { Parish, getAllParishes, searchParishes } from '../lib/parishService';
 
 export function MainSearchSection() {
   const [results, setResults] = useState<Parish[]>([]);
+  const [allParishes, setAllParishes] = useState<Parish[]>([]);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
 
+  // Pobierz wszystkie parafie raz na start
   useEffect(() => {
-    async function fetchParishes() {
+    async function fetchAllParishes() {
       setLoading(true);
-      const data = query.trim() 
-        ? await searchParishes(query) 
-        : await getAllParishes();
+      const data = await getAllParishes();
+      setAllParishes(data);
       setResults(data);
       setLoading(false);
     }
 
-    fetchParishes();
-  }, [query]);
+    fetchAllParishes();
+  }, []);
+
+  // Wyszukiwanie - aktualizuje tylko listę wyników
+  useEffect(() => {
+    if (!query.trim()) {
+      setResults(allParishes);
+      return;
+    }
+
+    async function search() {
+      const data = await searchParishes(query);
+      setResults(data);
+    }
+
+    search();
+  }, [query, allParishes]);
 
   return (
     <section className="py-8">
-      {/* Nagłówek */}
       <ParishSearchBar query={query} setQuery={setQuery} />
 
-      {/* Layout: Mapa 80% + Lista 20% */}
       <div className="flex gap-4 h-[600px]">
         {/* Mapa */}
         <div className="flex-[8] bg-gray-100 rounded-lg overflow-hidden">
-          <ParishMap />
+          <ParishMap parishes={allParishes} loading={loading} />
         </div>
+        
         {/* Lista wyników */}
         <div className="flex-[2] overflow-y-auto">
           {loading ? (
