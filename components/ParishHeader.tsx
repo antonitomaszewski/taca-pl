@@ -9,7 +9,7 @@ interface ParishHeaderProps {
 export function ParishHeader({ name, city, imageUrl, onDonateClick }: ParishHeaderProps) {
   return (
     <div className="bg-white border-b border-gray-200">
-      <div className="mx-auto max-w-[1200px] px-4 py-8">
+      <div className="mx-auto max-w-300 px-4 py-8">
         <div className="flex flex-col gap-6">
           {/* Zdjęcie parafii */}
           <div className="w-full h-64 md:h-96 bg-gray-200 rounded-lg overflow-hidden">

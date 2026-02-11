@@ -44,14 +44,14 @@ export function MainSearchSection() {
     <section className="py-8">
       <ParishSearchBar query={query} setQuery={setQuery} />
 
-      <div className="flex gap-4 h-[600px]">
+      <div className="flex gap-4 h-150">
         {/* Mapa */}
-        <div className="flex-[8] bg-gray-100 rounded-lg overflow-hidden">
+        <div className="flex-8 bg-gray-100 rounded-lg overflow-hidden">
           <ParishMap parishes={allParishes} loading={loading} />
         </div>
         
         {/* Lista wyników */}
-        <div className="flex-[2] overflow-y-auto">
+        <div className="flex-2 overflow-y-auto">
           {loading ? (
             <div className="bg-gray-50 rounded-lg p-4 flex items-center justify-center h-full">
               <span className="text-gray-500 text-sm">Ładowanie...</span>

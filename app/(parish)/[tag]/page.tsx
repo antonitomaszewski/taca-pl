@@ -27,7 +27,7 @@ export default function ParishPage({ params }: { params: Promise<{ tag: string }
   if (loading) {
     return (
       <main>
-        <div className="max-w-[1200px] mx-auto px-4 py-8">
+        <div className="max-w-300 mx-auto px-4 py-8">
           <p>Ładowanie...</p>
         </div>
       </main>
@@ -37,7 +37,7 @@ export default function ParishPage({ params }: { params: Promise<{ tag: string }
   if (!parish) {
     return (
       <main>
-        <div className="max-w-[1200px] mx-auto px-4 py-8">
+        <div className="max-w-300 mx-auto px-4 py-8">
           <p>Parish not found</p>
         </div>
       </main>
@@ -57,10 +57,10 @@ export default function ParishPage({ params }: { params: Promise<{ tag: string }
         onDonateClick={() => console.log('Przejście do płatności')}
       />
     
-      <div className="max-w-[1200px] mx-auto px-4 py-8">
+      <div className="max-w-300 mx-auto px-4 py-8">
         <div className="flex gap-6">
           {/* Mapa - kwadratowa, stała szerokość */}
-          <div className="w-[350px] h-[350px] flex-shrink-0">
+          <div className="w-87.5 h-87.5 shrink-0">
             <ParishMiniMap lat={parish.location.lat} lon={parish.location.lon} />
           </div>
 
